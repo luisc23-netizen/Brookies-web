@@ -1,0 +1,2 @@
+import {authorized,db} from '../../lib/server';import Admin from './ui';import type {Product} from '../../lib/data';
+export const dynamic='force-dynamic';export default async function Page(){const ok=await authorized();let products:Product[]=[];if(ok){const client=db();if(client){const result=await client.from('products').select('*').order('sort_order');products=result.data||[]}}return <Admin initialAuthorized={ok} initialProducts={products}/>}
