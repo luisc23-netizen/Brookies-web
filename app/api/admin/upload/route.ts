@@ -14,7 +14,7 @@ export async function POST(req:Request){
  if(!valid)return NextResponse.json({error:'El archivo no coincide con el formato de imagen'},{status:400});
  const {data:list,error:listError}=await client.storage.listBuckets();if(listError)return NextResponse.json({error:'Error de Storage: '+listError.message},{status:500});
  if(!list?.some(b=>b.name===bucket)){const {error}=await client.storage.createBucket(bucket,{public:true,fileSizeLimit:3145728,allowedMimeTypes:Object.keys(types)});if(error&&!/already exists|duplicate/i.test(error.message))return NextResponse.json({error:'No se pudo crear el bucket: '+error.message},{status:500})}
- const path=`logos/${crypto.randomUUID()}.${ext}`;const {error}=await client.storage.from(bucket).upload(path,bytes,{contentType:file.type,upsert:false,cacheControl:'3600'});
+ const path=`uploads/${crypto.randomUUID()}.${ext}`;const {error}=await client.storage.from(bucket).upload(path,bytes,{contentType:file.type,upsert:false,cacheControl:'3600'});
  if(error)return NextResponse.json({error:'No se pudo subir: '+error.message},{status:500});
  const {data}=client.storage.from(bucket).getPublicUrl(path);return NextResponse.json({url:data.publicUrl});
 }
