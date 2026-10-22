@@ -8,3 +8,10 @@ body{background:#f7efe6;color:#512c3b} .header{background:#f7efe6!important;colo
 
 /* Sin imágenes incluidas: espacios reservados hasta cargar fotografías reales desde /admin */
 .image-upload-placeholder{width:100%;min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:30px;color:#71354b;font-size:13px;font-weight:700;letter-spacing:2px;border:1px dashed #9f7582;background:#f0d9d3}.image-upload-placeholder small{font-size:11px;letter-spacing:0;font-weight:400}.gift-graphic .image-upload-placeholder{background:#e7c9c6;color:#71354b}.placeholder{border:1px dashed #9f7582;background:#f0d9d3;color:#71354b}.hero-art:has(.hero-photo) .image-upload-placeholder,.gift-graphic:has(.section-photo) .image-upload-placeholder{display:none}
+
+.admin-fields{border:1px solid #d5bdc3;border-radius:10px;margin:20px 0;padding:16px;display:grid;gap:12px}.admin-fields legend{font-weight:700;padding:0 8px}.category-manager{margin:32px 0;padding:22px;border:1px solid #d5bdc3;border-radius:12px}.category-list{display:grid;gap:12px}.category-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px;border-bottom:1px solid #ddd}.category-row>input{flex:1;min-width:180px}.category-row label{display:flex;align-items:center;gap:5px}.category-row input[type=number]{width:70px}.category-row input[type=checkbox]{width:auto}
+
+/* Logotipo cargado desde el administrador; conserva proporciones originales. */
+.brand-logo{display:block;width:auto;height:auto;max-width:min(180px,42vw);max-height:54px;object-fit:contain;object-position:left center}
+.footer-logo{display:block;width:auto;height:auto;max-width:min(230px,65vw);max-height:90px;object-fit:contain;object-position:left center}
+.logo-admin-preview{display:block;max-width:240px;max-height:110px;width:auto;height:auto;object-fit:contain;margin:10px 0;padding:10px;background:#f4eee8;border:1px solid #d7c9c3;border-radius:6px}
