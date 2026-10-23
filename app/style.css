@@ -29,3 +29,6 @@ body{background:#f7efe6;color:#512c3b} .header{background:#f7efe6!important;colo
 
 /* Cart drawer: keep line items readable on small screens */
 .drawer{min-height:0}.drawer-scroll{min-height:0;overscroll-behavior:contain}.drawer .cart-line{min-width:0;gap:12px}.drawer .cart-line>div:first-child{min-width:0;overflow-wrap:anywhere}.drawer .qty{flex-shrink:0}.brk-upsell-line img{object-fit:cover;flex-shrink:0}
+
+/* Ajustes de catálogo, Royal y personalización */
+.catalog{padding-bottom:34px!important}.royal-section{padding-top:35px!important}.royal-section h2{font-size:clamp(54px,6vw,90px);letter-spacing:-5px;line-height:1.05;margin:8px 0 20px}.flavor-info{display:flex;align-items:center;gap:12px;min-width:0;flex:1}.flavor-info img,.flavor-placeholder{width:58px;height:58px;object-fit:cover;border-radius:3px;flex-shrink:0}.flavor-placeholder{display:grid;place-items:center;background:#490F0E;color:#f5efe7}.flavor-info strong{font-size:14px;overflow-wrap:anywhere}.flavor-line .qty{flex-shrink:0}.hero-art{order:-1}.hero-copy{order:0}@media(max-width:680px){.hero{display:flex;flex-direction:column}.hero-art{order:-1;min-height:330px}.hero-copy{order:0;padding:38px 7% 55px!important}.hero .vertical{display:none}.royal-section{padding-top:25px!important}.royal-section h2{font-size:clamp(44px,11vw,72px);letter-spacing:-3px}.catalog{padding-bottom:25px!important}}
