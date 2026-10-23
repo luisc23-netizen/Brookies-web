@@ -26,3 +26,6 @@ body{background:#f7efe6;color:#512c3b} .header{background:#f7efe6!important;colo
 
 /* Upsells: product image and legible empty-state guidance */
 .brk-upsell-line .upsell-placeholder{width:65px;height:65px;flex-shrink:0;background:#490F0E;color:#f5efe7;display:grid;place-items:center;font-size:9px;letter-spacing:.08em}.brk-upsell .upsell-empty{font-size:13px;line-height:1.45;opacity:.75;margin:10px 0 14px}.brk-upsell-line img{display:block;width:65px;height:65px;object-fit:cover;border-radius:4px}.brk-upsell-line>div:not(.upsell-placeholder){min-width:0}.brk-upsell-line strong{display:block;font-size:14px}.brk-upsell-line>button{flex-shrink:0}
+
+/* Cart drawer: keep line items readable on small screens */
+.drawer{min-height:0}.drawer-scroll{min-height:0;overscroll-behavior:contain}.drawer .cart-line{min-width:0;gap:12px}.drawer .cart-line>div:first-child{min-width:0;overflow-wrap:anywhere}.drawer .qty{flex-shrink:0}.brk-upsell-line img{object-fit:cover;flex-shrink:0}
