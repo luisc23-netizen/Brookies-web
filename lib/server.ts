@@ -3,7 +3,21 @@ import {cookies} from 'next/headers';
 import {createHmac,timingSafeEqual} from 'crypto';
 import {demo,Product} from './data';
 export function db(){const u=process.env.SUPABASE_URL,k=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!u||!k)return null;return createClient(u,k,{auth:{persistSession:false}})}
-export async function catalog():Promise<Product[]>{const client=db();if(!client)return demo;const {data,error}=await client.from('products').select('*').eq('active',true).order('sort_order');if(error){console.error(error.message);return []}return data as Product[]}
+export async function catalog():Promise<Product[]>{
+ const client=db();
+ if(!client)return demo;
+ // Fetch every page explicitly: never assume a default row cap or an initial subset.
+ const products:Product[]=[];
+ const pageSize=500;
+ for(let from=0;from<10000;from+=pageSize){
+  const {data,error}=await client.from('products').select('*').eq('active',true).order('sort_order',{ascending:true}).order('id',{ascending:true}).range(from,from+pageSize-1);
+  if(error){console.error('Brookies catalog fetch failed:',error.message);throw new Error('No se pudo cargar el catálogo de Brookies');}
+  products.push(...(data as Product[]||[]));
+  if(!data||data.length<pageSize)break;
+ }
+ return products;
+}
+
 function sign(s:string){return createHmac('sha256',process.env.SESSION_SECRET||'').update(s).digest('hex')}
 export function secureEqual(a:string,b:string){const x=Buffer.from(a),y=Buffer.from(b);return x.length===y.length&&timingSafeEqual(x,y)}
 export function sessionValue(){const v='brookies-admin';return v+'.'+sign(v)}
