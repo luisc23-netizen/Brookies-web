@@ -1,0 +1,3 @@
+import {NextRequest,NextResponse} from 'next/server';
+import {db} from '../../../lib/server';
+export async function POST(req:NextRequest){try{const body=await req.json();if(!['cart_updated','whatsapp_checkout'].includes(body.type)||!Array.isArray(body.items)||body.items.length>50)return NextResponse.json({error:'Evento inválido'},{status:400});const client=db();if(!client)return NextResponse.json({ok:false},{status:503});const {error}=await client.from('web_events').insert({event_type:body.type,items:body.items.map((x:{id:string;qty:number})=>({id:String(x.id).slice(0,100),qty:Number(x.qty)||0}))});return NextResponse.json({ok:!error},{status:error?500:200})}catch{return NextResponse.json({ok:false},{status:400})}}

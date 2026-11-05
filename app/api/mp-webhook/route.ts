@@ -1,0 +1,4 @@
+import {NextRequest,NextResponse} from 'next/server';
+import {refreshPayment} from '../../../lib/mp';
+export const runtime='nodejs';
+export async function POST(req:NextRequest){try{const body=await req.json();const id=String(body.data?.id||req.nextUrl.searchParams.get('data.id')||'');if(!/^\d+$/.test(id))return NextResponse.json({ok:true});const token=process.env.MP_ACCESS_TOKEN;if(!token)return NextResponse.json({ok:false},{status:503});const response=await fetch(`https://api.mercadopago.com/v1/payments/${id}`,{headers:{Authorization:`Bearer ${token}`},cache:'no-store'});if(!response.ok)return NextResponse.json({ok:false},{status:502});const payment=await response.json();if(payment.external_reference)await refreshPayment(String(payment.external_reference));return NextResponse.json({ok:true})}catch{return NextResponse.json({ok:false},{status:500})}}
