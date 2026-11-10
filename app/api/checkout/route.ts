@@ -1,13 +1,16 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {catalog,db,siteSettings} from '../../../lib/server';
+import {sanitizeAttribution} from '../../../lib/attribution';
 export const runtime='nodejs';
 export async function POST(req:NextRequest){
  try{
   const token=process.env.MP_ACCESS_TOKEN;if(!token)return NextResponse.json({error:'Mercado Pago todavía no está configurado'},{status:503});
-  const body=await req.json();const items=body.items;
+  const body=await req.json();const items=body.items;const attribution=sanitizeAttribution(body.attribution);
   if(!Array.isArray(items)||!items.length||items.length>50)return NextResponse.json({error:'Carrito inválido'},{status:400});
   const delivery=body.delivery;
   if(!['Retiro por el local','Envío dentro de Rosario','Otras zonas (a consultar)'].includes(delivery))return NextResponse.json({error:'Modalidad inválida'},{status:400});
+  const customerName=String(body.customer_name||'').trim().replace(/\s+/g,' ').slice(0,120);
+  if(!customerName)return NextResponse.json({error:'Ingresá tu nombre para el pedido'},{status:400});
   const address=String(body.address||'').trim().slice(0,300),note=String(body.note||'').slice(0,1000);
   if(delivery!=='Retiro por el local'&&!address)return NextResponse.json({error:'Ingresá tu dirección'},{status:400});
   const products=await catalog();const rows=[] as {id:string;name:string;qty:number;unit_price:number;flavors:{id:string;name:string;qty:number}[]}[];
@@ -20,7 +23,7 @@ export async function POST(req:NextRequest){
   if(!Number.isFinite(fee)||fee<0)return NextResponse.json({error:'Envío mal configurado'},{status:500});
   const total=rows.reduce((n,r)=>n+r.qty*r.unit_price,0)+fee;
   const client=db();if(!client)return NextResponse.json({error:'Base de datos no disponible'},{status:503});
-  const {data:order,error}=await client.from('web_orders').insert({items:rows,delivery,address,note,shipping_fee:fee,total,status:'pending'}).select('id').single();if(error||!order)throw Error('No se pudo guardar el pedido. Ejecutá la migración de pedidos.');
+  const {data:order,error}=await client.from('web_orders').insert({items:rows,delivery,address,customer_name:customerName,note,shipping_fee:fee,total,status:'pending',attribution}).select('id').single();if(error||!order)throw Error('No se pudo guardar el pedido. Ejecutá la migración de pedidos.');
   const origin=(process.env.NEXT_PUBLIC_SITE_URL||req.nextUrl.origin).replace(/\/$/,'');
   const preference={items:[...rows.map(r=>({id:r.id,title:r.name,quantity:r.qty,unit_price:r.unit_price,currency_id:'ARS'})),...(fee>0?[{id:'shipping',title:'Envío dentro de Rosario',quantity:1,unit_price:fee,currency_id:'ARS'}]:[])],external_reference:order.id,back_urls:{success:`${origin}/pago/${order.id}`,failure:`${origin}/pago/${order.id}`,pending:`${origin}/pago/${order.id}`},auto_return:'approved',notification_url:`${origin}/api/mp-webhook`};
   const response=await fetch('https://api.mercadopago.com/checkout/preferences',{method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(preference),cache:'no-store'});
