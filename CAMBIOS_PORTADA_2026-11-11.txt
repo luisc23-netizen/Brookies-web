@@ -1,0 +1,15 @@
+BROOKIES - ACTUALIZACION DE PORTADA Y TEXTOS EDITABLES
+
+- La descripción de portada del admin se muestra inmediatamente debajo del encabezado y antes del carrusel, con tipografía grande y negrita en todo el texto, incluido "Tómese su tiempo...".
+- El texto pequeño de portada aparece sobre la descripción. Se mantiene editable desde el admin.
+- El carrusel de productos conserva las fotos y controles; el nombre del producto destacado aparece debajo del carrusel.
+- Se elimina la sección final "THE BROOKIES EXPERIENCE / NO ES SOLO UNA COOKIE".
+- Nuevo campo editable: descripción de Royal.
+- Nuevo campo editable: texto de productos de Celebraciones.
+- Se conserva el campo existente de descripción de Visítanos ("Vení por una cookie...").
+- Se incorpora un campo para la frase "NO ES SOLO UNA COOKIE" como texto reservado, aunque la sección inferior ya no se muestra.
+- Se conserva el checkout, el seguimiento de campañas y las estadísticas del ZIP anterior.
+
+SUPABASE: los textos nuevos usan filas de site_settings (key/value). No es necesario agregar columnas.
+
+IMPORTANTE: este paquete no fue compilado ni probado contra el sitio de producción. Probar en Vercel Preview antes de promover a producción.
