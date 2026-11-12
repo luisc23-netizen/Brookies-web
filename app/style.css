@@ -73,3 +73,7 @@ body{background:#f7efe6;color:#512c3b} .header{background:#f7efe6!important;colo
 /* Oferta nocturna, sin alterar el diseño del checkout diurno. */
 .brk-after-dark {display:flex;flex-direction:column;gap:6px;padding:13px 15px;background:#481019;color:#fff;border-radius:9px;margin:8px 0 12px;font-size:13px;line-height:1.5}
 .brk-after-dark strong {color:#e9c783;letter-spacing:.07em;font-size:12px}
+
+/* Ajustes de conversión de noviembre */
+.hero-buy-box{border:0;font-family:inherit;cursor:pointer}.hero-buy-box:disabled{opacity:.5;cursor:not-allowed}
+.flavor-copy{display:flex;flex-direction:column;gap:5px;min-width:0}.flavor-description{font-size:11px;line-height:1.45;color:#795f68;display:block;overflow-wrap:anywhere}.flavor-line{gap:12px}.cart-coordination{font-size:12px;line-height:1.45;color:#765b65;margin:-9px 0 17px;max-width:340px}.drawer-head>div{min-width:0}
