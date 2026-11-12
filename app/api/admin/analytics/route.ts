@@ -11,7 +11,7 @@ const dayFmt=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'
 const hourFmt=new Intl.DateTimeFormat('en-GB',{timeZone:tz,hour:'2-digit',hourCycle:'h23'});
 export async function GET(req:NextRequest){
  if(!await authorized())return NextResponse.json({error:'No autorizado'},{status:401});const client=db();if(!client)return NextResponse.json({error:'Base de datos no configurada'},{status:503});
- const days=Math.min(365,Math.max(1,Number(req.nextUrl.searchParams.get('days'))||30));const since=new Date(Date.now()-days*86400000).toISOString();
+ const rawDays=req.nextUrl.searchParams.get('days');const days=rawDays==='0'?0:Math.min(365,Math.max(1,Number(rawDays)||30));const localDay=new Intl.DateTimeFormat('sv-SE',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const since=days===0?new Date(localDay+'T03:00:00.000Z').toISOString():new Date(Date.now()-days*86400000).toISOString();
  const orders:Record<string,unknown>[]=[],events:Record<string,unknown>[]=[];
  for(let i=0;i<100;i++){const {data,error}=await client.from('web_orders').select('id,created_at,total,status,items,attribution,payment_method,shipping_fee').gte('created_at',since).order('created_at',{ascending:false}).range(i*500,i*500+499);if(error)return NextResponse.json({error:error.message},{status:500});orders.push(...(data||[]));if(!data||data.length<500)break}
  for(let i=0;i<100;i++){const {data,error}=await client.from('web_events').select('id,created_at,event_type,total,attribution,items').gte('created_at',since).order('created_at',{ascending:false}).range(i*500,i*500+499);if(error)return NextResponse.json({error:error.message},{status:500});events.push(...(data||[]));if(!data||data.length<500)break}

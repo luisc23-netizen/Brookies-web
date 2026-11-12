@@ -58,3 +58,18 @@ body{background:#f7efe6;color:#512c3b} .header{background:#f7efe6!important;colo
 .hero-intro-description{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,4.1vw,60px);line-height:1.15;font-weight:700;max-width:1050px;margin:0 auto 24px;text-wrap:balance}
 .hero-intro-secondary{font-family:Arial,Helvetica,sans-serif;font-size:clamp(19px,2vw,27px);line-height:1.4;font-weight:600;max-width:1000px;margin:0 auto;text-wrap:balance;white-space:pre-line}
 @media(max-width:680px){.hero-intro-description{font-size:clamp(29px,7vw,38px);margin-bottom:17px}.hero-intro-secondary{font-size:clamp(18px,4.6vw,22px);line-height:1.38}}
+
+/* Conversion improvements, November 2026 */
+.hero-buy-box{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin:25px auto 12px;background:#561018;color:#fff;padding:15px 24px;font-weight:700;letter-spacing:.05em;text-decoration:none;border-radius:3px;min-height:48px}
+.hero-delivery-line{font-size:clamp(13px,1.4vw,16px);margin:4px auto 10px;line-height:1.5}
+.hero-stars{color:#bd923e;font-size:22px;letter-spacing:5px;margin:0 auto}
+.delivery-reassurance{font-weight:600;font-size:13px;line-height:1.5;margin:8px 0 16px}
+.brk-go-big-upsell{border:1px solid #d9c9c1;border-radius:8px;padding:15px;margin:14px 0;background:#f9f2ea}
+.brk-go-big-upsell p{margin:7px 0 12px;font-size:13px}
+.brk-go-big-upsell button{padding:10px 15px;border:1px solid #542b39;background:transparent;color:#542b39;font-weight:700;cursor:pointer}
+.checkout-whatsapp{background:transparent!important;color:#237348!important;border:1px solid #237348!important}
+@media(max-width:680px){.hero-buy-box{width:100%;max-width:380px}.hero-delivery-line{font-size:12px}.hero-stars{font-size:19px}}
+
+/* Oferta nocturna, sin alterar el diseño del checkout diurno. */
+.brk-after-dark {display:flex;flex-direction:column;gap:6px;padding:13px 15px;background:#481019;color:#fff;border-radius:9px;margin:8px 0 12px;font-size:13px;line-height:1.5}
+.brk-after-dark strong {color:#e9c783;letter-spacing:.07em;font-size:12px}
