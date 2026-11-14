@@ -229,3 +229,11 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-floating-swipe{top:auto!important;bottom:clamp(245px,32vh,340px)!important;transform:translateX(-50%)!important;animation:brk-swipe-bob 3.8s ease-in-out both!important}
 @keyframes brk-swipe-bob{0%{opacity:0;translate:0 9px}12%{opacity:1}30%{translate:0 -7px}48%{translate:0 6px}65%{translate:0 -6px}82%{opacity:1;translate:0 4px}100%{opacity:0;translate:0 -6px;visibility:hidden}}
 @media(max-height:700px){.brk-floating-swipe{bottom:clamp(185px,29vh,235px)!important}}
+
+/* Reels circulares: cada tarjeta conserva un snap independiente. */
+.brk-reel-wrap{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;position:relative}
+.brk-reel-wrap>.brk-reel{scroll-snap-align:none}
+/* Compartir: solo contorno en crema, sin pastilla ni fondo. */
+.brk-float-share,.brk-float-share:hover,.brk-float-share:focus-visible{background:transparent!important;border:0!important;box-shadow:none!important;color:#f5e6d8!important;border-radius:0!important;filter:drop-shadow(0 1px 2px #250715b8)}
+.brk-float-share svg{stroke:#f5e6d8;stroke-width:2.1}
+@media(prefers-reduced-motion:reduce){.brk-reels{scroll-behavior:auto!important}}
