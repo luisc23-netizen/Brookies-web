@@ -58,7 +58,7 @@ export default function Store({products,settings,initialSection='cookies',initia
     el.style.scrollSnapType='none';
     el.style.scrollBehavior='auto';
     const offset=Math.min(135,Math.max(70,el.clientHeight*.17));
-    const duration=1200;
+    const duration=2400;
     const start=performance.now();
     let frame=0;
     const ease=(x:number)=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
@@ -66,7 +66,8 @@ export default function Store({products,settings,initialSection='cookies',initia
      if(scrollRef.current!==el)return;
      const t=Math.min(1,(now-start)/duration);
      // Avanza y vuelve; alcanza a revelar la foto siguiente.
-     const progress=t<.5?ease(t*2):ease((1-t)*2);
+     const cycle=(t*2)%1;
+     const progress=t>=1?0:cycle<.5?ease(cycle*2):ease((1-cycle)*2);
      el.scrollTop=base+offset*progress;
      if(t<1){frame=requestAnimationFrame(animate)}
      else{
@@ -101,6 +102,12 @@ export default function Store({products,settings,initialSection='cookies',initia
    }
   },170);
  };
+ const viewOrder=()=>{
+  if(step==='feed'&&count>0){
+   void fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'checkout_started',items:[...selection,...extras],total,attribution:getAttribution()})}).catch(()=>{});
+  }
+  setStep(step==='feed'?'extras':'checkout');
+ };
  const phone=(settings.whatsapp||process.env.NEXT_PUBLIC_WHATSAPP_NUMBER||'5493412477553').replace(/\D/g,'');
  const payload=()=>({items:orderLines,delivery,address:address.trim(),customer_name:customerName.trim(),note:note.trim(),attribution:getAttribution()});
  const valid=()=>{if(!count){setError('Elegí al menos un producto.');return false}if(!customerName.trim()){setError('Ingresá tu nombre.');return false}if(delivery!=='Retiro por el local'&&!address.trim()){setError('Ingresá la dirección y localidad.');return false}setError('');return true};
@@ -124,6 +131,6 @@ export default function Store({products,settings,initialSection='cookies',initia
  {step==='extras'&&<div className="brk-flow-page"><button className="brk-back" onClick={()=>setStep('feed')}>← VOLVER A LOS SABORES</button><h1>¿Algo más para tu pedido?</h1><p>Un toque Royal o un pequeño detalle. Podés saltear esta parte cuando quieras.</p><h2>Royal</h2><div className="brk-extra-grid">{royals.map(p=><div className="brk-extra" key={p.id}>{(p.image||p.images?.[0])&&<img src={p.image||p.images?.[0]} alt={p.name}/>}<strong>{p.name}</strong><small>{p.description}</small><span>{money(p.price)}</span><div><button onClick={()=>change(p.id,-1,true)} disabled={!qty(p.id,true)}>−</button><b>{qty(p.id,true)}</b><button onClick={()=>change(p.id,1,true)}>+</button></div></div>)}</div><h2>Pequeños detalles</h2><div className="brk-extra-grid">{details.map(p=><div className="brk-extra" key={p.id}>{(p.image||p.images?.[0])&&<img src={p.image||p.images?.[0]} alt={p.name}/>}<strong>{p.name}</strong><small>{p.description}</small><span>{money(p.price)}</span><div><button onClick={()=>change(p.id,-1,true)} disabled={!qty(p.id,true)}>−</button><b>{qty(p.id,true)}</b><button onClick={()=>change(p.id,1,true)}>+</button></div></div>)}</div></div>}
  {step==='checkout'&&<div className="brk-flow-page brk-checkout"><button className="brk-back" onClick={()=>setStep('extras')}>← SEGUIR ELIGIENDO</button><h1>Comprá ahora.</h1><p className="brk-lead">Coordinamos el retiro o envío después de tu compra.</p><div className="brk-order-list">{[...selection,...extras].map(e=>{const p=active.find(p=>p.id===e.id);return p?<div key={e.id}><span>{e.qty} × {p.name}</span><div><button onClick={()=>change(e.id,-1,!cookieFlavor(p))}>−</button><button onClick={()=>change(e.id,1,!cookieFlavor(p))}>+</button></div></div>:null})}</div><div className="brk-order-total"><span>Productos</span><strong>{money(total)}</strong></div><label>Nombre para el pedido *<input value={customerName} onChange={e=>setCustomerName(e.target.value)} placeholder="¿A nombre de quién?" autoComplete="name"/></label><label>Retiro o envío<select value={delivery} onChange={e=>setDelivery(e.target.value)}><option>Retiro por el local</option><option>Envío dentro de Rosario</option><option>Otras zonas (a consultar)</option></select></label>{delivery!=='Retiro por el local'&&<label>Dirección y localidad *<input value={address} onChange={e=>setAddress(e.target.value)} placeholder="Calle, número y localidad"/></label>}<label>Observaciones<textarea rows={2} value={note} onChange={e=>setNote(e.target.value)}/></label><div className="brk-order-total"><span>{delivery==='Otras zonas (a consultar)'?'Envío a cotizar':'Total con envío'}</span><strong>{money(total+fee)}</strong></div>{error&&<p role="alert" className="brk-error">{error}</p>}<button className="brk-pay" disabled={busy||!count} onClick={pay}>PAGAR CON MERCADO PAGO <ArrowRight/></button><button className="brk-wa" disabled={busy||!count} onClick={whatsapp}>ENVIAR MI PEDIDO POR WHATSAPP <ArrowRight/></button></div>}
  {step!=='checkout'&&<div className={`brk-bottom ${step==='extras'?'brk-bottom-compact':''}`}>
- {step==='feed'&&section==='empresas'?<button className="brk-next brk-business-quote" onClick={businessQuote}><span>PEDIR PRESUPUESTO</span><ArrowRight size={18}/></button>:<button className="brk-next" onClick={()=>setStep(step==='feed'?'extras':'checkout')}><span>{step==='feed'?'VER MI PEDIDO Y COMPRAR':'FINALIZAR MI COMPRA'}</span><strong>{money(total)}</strong><ArrowRight size={18}/></button>}{step==='extras'&&<button className="brk-skip" onClick={()=>setStep('checkout')}>Continuar sin agregar nada</button>}</div>}
+ {step==='feed'&&section==='empresas'?<button className="brk-next brk-business-quote" onClick={businessQuote}><span>PEDIR PRESUPUESTO</span><ArrowRight size={18}/></button>:<button className="brk-next" onClick={viewOrder}><span>{step==='feed'?'VER MI PEDIDO Y COMPRAR':'FINALIZAR MI COMPRA'}</span><strong>{money(total)}</strong><ArrowRight size={18}/></button>}{step==='extras'&&<button className="brk-skip" onClick={()=>setStep('checkout')}>Continuar sin agregar nada</button>}</div>}
  </div>;
 }
