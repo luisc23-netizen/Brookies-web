@@ -203,3 +203,17 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-reel .brk-reel-content p{-webkit-line-clamp:3}
 @media(max-height:700px){.brk-reel.brk-cookie-layout .brk-reel-content,.brk-reel.brk-other-layout .brk-reel-content{bottom:90px!important}.brk-cookie-tools{top:99px;padding-top:3px}.brk-cookie-tools .brk-slot{height:27px}.brk-reel .brk-reel-content p{-webkit-line-clamp:2}}
 @media(max-width:390px){.brk-top img{max-width:112px}.brk-top a:first-child{font-size:20px}.brk-header-hint{font-size:9px}.brk-cookie-tools{padding-left:10px;padding-right:10px}}
+
+/* Revisión: selección separada de las categorías, descripción íntegra y compartir por producto */
+.brk-cookie-tools{top:113px!important;margin-top:0;padding-top:13px!important;border-radius:0 0 12px 12px}
+.brk-reel .brk-reel-content p{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;max-height:none!important;line-height:1.4}
+.brk-reel .brk-reel-content{max-height:none!important;bottom:clamp(86px,11vh,125px)!important}
+.brk-reel-content h1{font-size:clamp(29px,7vw,46px)!important;line-height:1.08}
+.brk-reel-content p{font-size:clamp(12px,3.1vw,14px)!important;margin:5px 0 0!important}
+.brk-float-controls{position:absolute;top:0!important;right:14px!important;bottom:auto!important;transform:translateY(-105%)!important;gap:8px}
+.brk-float-share{height:49px;width:49px;border-radius:50%;background:#f5e6d8;color:#4b1023;position:relative}
+.brk-share-feedback{position:absolute;right:54px;top:15px;white-space:nowrap;border-radius:6px;padding:4px 7px;background:#4b1023;color:#fff;font-size:11px}
+.brk-floating-swipe{position:absolute;z-index:8;left:50%;top:42%;transform:translate(-50%,-50%);padding:8px 15px;border-radius:30px;background:#2b0a1a9c;color:#fff;font-size:11px;letter-spacing:.12em;font-weight:800;pointer-events:none;animation:brk-swipe-disappear 3.5s ease-out both}
+.brk-floating-swipe span{font-size:17px;vertical-align:middle}
+@keyframes brk-swipe-disappear{0%,65%{opacity:1}100%{opacity:0;visibility:hidden}}
+@media(max-height:700px){.brk-reel .brk-reel-content{bottom:83px!important}.brk-reel-content h1{font-size:28px!important}.brk-cookie-tools{top:107px!important}}
