@@ -145,3 +145,21 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-flow-page{padding-top:76px;padding-bottom:135px}
 .brk-checkout{padding-top:76px;padding-bottom:40px}
 @media(max-height:700px){.brk-reel-content{bottom:142px}.brk-progress .brk-slot{height:27px}}
+
+/* Experiencia vertical: foto protagonista y controles flotantes. */
+.brk-reel-content{bottom:clamp(100px,15vh,170px)!important;padding-right:78px}
+.brk-reel-photo img{object-position:center 70%}
+.brk-reel-price{display:inline-block;background:#4b1023;color:#fff;padding:8px 13px;border-radius:999px;font-size:16px}
+.brk-float-controls{position:absolute;z-index:6;right:17px;bottom:clamp(205px,29vh,310px);display:flex;flex-direction:column;align-items:center;gap:8px}
+.brk-float-controls button{display:flex;align-items:center;justify-content:center;border:0;cursor:pointer;box-shadow:0 5px 20px #0005}
+.brk-float-plus{width:62px;height:62px;border-radius:50%;background:#f5e6d8;color:#4b1023}
+.brk-float-minus{min-width:48px;height:38px;gap:5px;padding:0 10px;border-radius:20px;background:#4b1023;color:#fff}
+.brk-header-contact{display:grid;place-items:center;min-width:43px;height:43px;border-radius:50%;background:#4b1023;color:#f5e6d8}
+.brk-business-quote{cursor:pointer}
+.brk-empty .brk-business-quote{display:flex;gap:12px;align-items:center;margin:22px auto;background:#f5e6d8;color:#4b1023;border:0;border-radius:8px;padding:14px 18px;font-weight:800}
+.brk-empty h1{font:700 32px Georgia,serif}
+.brk-empty p{font-size:16px;line-height:1.6}
+@media(min-width:800px){
+ body:has(.brk-app){background:radial-gradient(ellipse at 15% 30%,#6c243c 0%,transparent 52%),radial-gradient(ellipse at 90% 65%,#32101d 0%,transparent 55%),#260b17}
+ .brk-app{box-shadow:0 0 65px #10040c70}
+}
