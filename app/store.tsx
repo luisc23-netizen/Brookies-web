@@ -50,10 +50,34 @@ export default function Store({products,settings,initialSection='cookies',initia
    const startTimer=window.setTimeout(()=>{
     if(scrollRef.current!==el||wrapGuard.current)return;
     const base=el.scrollTop;
-    // El pequeño gesto deja ver la próxima foto y regresa al producto inicial.
-    el.scrollTo({top:base+Math.min(105,el.clientHeight*.14),behavior:'smooth'});
-    window.setTimeout(()=>{if(scrollRef.current===el&&Math.abs(el.scrollTop-base)<el.clientHeight*.4)el.scrollTo({top:base,behavior:'smooth'})},650);
-   },850);
+    const previousSnap=el.style.scrollSnapType;
+    const previousBehavior=el.style.scrollBehavior;
+    // Desactivar snap durante el gesto de bienvenida: de otro modo
+    // el navegador devuelve la foto al inicio antes de mostrar el avance.
+    wrapGuard.current=true;
+    el.style.scrollSnapType='none';
+    el.style.scrollBehavior='auto';
+    const offset=Math.min(135,Math.max(70,el.clientHeight*.17));
+    const duration=1200;
+    const start=performance.now();
+    let frame=0;
+    const ease=(x:number)=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+    const animate=(now:number)=>{
+     if(scrollRef.current!==el)return;
+     const t=Math.min(1,(now-start)/duration);
+     // Avanza y vuelve; alcanza a revelar la foto siguiente.
+     const progress=t<.5?ease(t*2):ease((1-t)*2);
+     el.scrollTop=base+offset*progress;
+     if(t<1){frame=requestAnimationFrame(animate)}
+     else{
+      el.scrollTop=base;
+      el.style.scrollSnapType=previousSnap;
+      el.style.scrollBehavior=previousBehavior;
+      wrapGuard.current=false;
+     }
+    };
+    frame=requestAnimationFrame(animate);
+   },950);
    return ()=>window.clearTimeout(startTimer);
   }
  },[section,step,shown.length,initialProduct]);
