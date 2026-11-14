@@ -252,3 +252,9 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-delivery-buttons small{display:block;font-size:11px;font-weight:500;margin-top:7px}
 .brk-checkout-address{display:block;text-align:center;font-style:normal;font-size:12px;opacity:.8;margin:20px 0 8px}
 .brk-shipping-note{font-size:12px;line-height:1.5}
+
+/* Cabecera sin franja: fotografía continua detrás del logo y los accesos. */
+.brk-app .brk-top{position:absolute!important;background:transparent!important;box-shadow:none!important;filter:none!important;justify-content:flex-start;gap:9px}
+.brk-top>a:first-child{margin-right:auto}
+.brk-top>.brk-header-contact{margin-left:0}
+.brk-author-message .brk-author-second{display:block;margin-top:5px}
