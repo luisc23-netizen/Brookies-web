@@ -217,3 +217,15 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-floating-swipe span{font-size:17px;vertical-align:middle}
 @keyframes brk-swipe-disappear{0%,65%{opacity:1}100%{opacity:0;visibility:hidden}}
 @media(max-height:700px){.brk-reel .brk-reel-content{bottom:83px!important}.brk-reel-content h1{font-size:28px!important}.brk-cookie-tools{top:107px!important}}
+
+/* Ajustes de compartir y selección de cookies — 2026-11-14 */
+.brk-cookie-tools{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding-top:13px!important;pointer-events:none;overflow:visible!important}
+.brk-cookie-tools .brk-progress,.brk-cookie-tools .brk-edit-selection,.brk-cookie-tools .brk-selection-list,.brk-cookie-tools .brk-bottom-summary{pointer-events:auto}
+.brk-cookie-tools .brk-progress .brk-slot{border:1.6px dashed #f5e6d8!important;color:#fff!important;background:#4b10232e!important;filter:drop-shadow(0 1px 2px #210a19aa);text-shadow:0 1px 3px #210a19,0 0 4px #210a19}
+.brk-cookie-tools .brk-progress .brk-slot.filled{border:1.7px solid #f5e6d8!important;background:#d5b18c!important;color:#4b1023!important}
+.brk-cookie-tools .brk-bottom-summary span{color:#fff!important;font-weight:750;text-shadow:-1px -1px 0 #3a1022,1px -1px 0 #3a1022,-1px 1px 0 #3a1022,1px 1px 0 #3a1022,0 2px 5px #17030c}
+.brk-cookie-tools .brk-edit-selection{width:max-content;max-width:100%;padding:7px 12px!important;background:#390e21d9!important;border:1px solid #f4d6c760!important;border-radius:22px;box-shadow:0 2px 8px #18071566}
+.brk-cookie-tools .brk-selection-list{background:#390e21ed;border-radius:9px;padding:7px;overflow-y:auto!important}
+.brk-floating-swipe{top:auto!important;bottom:clamp(245px,32vh,340px)!important;transform:translateX(-50%)!important;animation:brk-swipe-bob 3.8s ease-in-out both!important}
+@keyframes brk-swipe-bob{0%{opacity:0;translate:0 9px}12%{opacity:1}30%{translate:0 -7px}48%{translate:0 6px}65%{translate:0 -6px}82%{opacity:1;translate:0 4px}100%{opacity:0;translate:0 -6px;visibility:hidden}}
+@media(max-height:700px){.brk-floating-swipe{bottom:clamp(185px,29vh,235px)!important}}
