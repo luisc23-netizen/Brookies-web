@@ -121,3 +121,27 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-selection-list button{background:#f5e6d8;color:#4b1023;border:0;border-radius:5px;padding:6px;display:grid;place-items:center}
 .brk-selection-list p{font-size:12px}
 @media(max-height:700px){.brk-progress .brk-slot{height:30px;max-width:42px}}
+
+/* Ajustes de visualización 2026-11-14: mayor área fotográfica y cierre compacto. */
+.brk-reel-photo img{object-position:center 72%}
+.brk-reel-content{bottom:155px}
+.brk-reel-actions{margin-top:7px}
+.brk-reel-qty{gap:10px;padding:5px 7px}
+.brk-reel-qty strong{font-size:15px;white-space:nowrap;padding:0 5px}
+.brk-bottom{padding-top:8px;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+.brk-progress{margin:5px 0 6px;gap:6px}
+.brk-progress .brk-slot{height:32px;max-width:44px}
+.brk-bottom-summary{margin:4px 0 6px;min-height:0}
+.brk-bottom-summary:empty{display:none}
+.brk-bottom-summary span:empty{display:none}
+.brk-next{padding:10px 12px;gap:8px}
+.brk-next span{flex:1;text-align:left}
+.brk-next strong{font-size:16px;white-space:nowrap}
+.brk-bottom-compact{padding-top:9px;padding-bottom:max(9px,env(safe-area-inset-bottom))}
+.brk-bottom-compact .brk-next{margin:0}
+.brk-bottom-compact .brk-skip{margin-top:4px}
+.brk-bottom-nobox .brk-bottom-summary{display:none}
+.brk-app:has(.brk-flow-page) .brk-tabs{display:none}
+.brk-flow-page{padding-top:76px;padding-bottom:135px}
+.brk-checkout{padding-top:76px;padding-bottom:40px}
+@media(max-height:700px){.brk-reel-content{bottom:142px}.brk-progress .brk-slot{height:27px}}
