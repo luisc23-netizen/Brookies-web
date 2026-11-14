@@ -174,3 +174,32 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-reel-content h1{margin:5px 0 6px}
 .brk-reel-content p{margin:3px 0}
 @media(min-width:750px){.brk-reel-content{bottom:110px!important}}
+
+/* Dos composiciones independientes: Cookies vs otras colecciones. */
+.brk-reel.brk-cookie-layout .brk-reel-content{bottom:clamp(180px,25vh,235px)!important;padding-right:78px}
+.brk-reel.brk-other-layout .brk-reel-content{bottom:clamp(115px,17vh,165px)!important;padding-right:78px}
+.brk-reel .brk-reel-content{max-height:calc(100dvh - 300px);overflow:visible}
+.brk-reel .brk-reel-content p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;line-height:1.35}
+.brk-reel.brk-cookie-layout .brk-float-controls,.brk-reel.brk-other-layout .brk-float-controls{bottom:auto;top:0;transform:translateY(-115%)}
+@media(max-height:700px){.brk-reel.brk-cookie-layout .brk-reel-content{bottom:155px!important}.brk-reel.brk-other-layout .brk-reel-content{bottom:110px!important}.brk-reel .brk-reel-content p{-webkit-line-clamp:2}}
+.brk-tuesday-banner{text-align:center;font-weight:800;font-size:11px;letter-spacing:.035em;padding:4px 2px;color:#f7e0b7}
+
+/* Diseño final: barra inferior mínima, herramientas de Cookies bajo categorías. */
+.brk-bottom{padding-top:9px!important;padding-bottom:max(9px,env(safe-area-inset-bottom))!important}
+.brk-bottom .brk-next{margin:0!important}
+.brk-cookie-tools{position:absolute;top:103px;left:0;right:0;z-index:18;padding:7px 14px 6px;background:linear-gradient(180deg,#390e21f2,#390e21c9);border-bottom:1px solid #e6bca533;max-height:min(42dvh,290px);overflow-y:auto;scrollbar-width:thin}
+.brk-cookie-tools .brk-progress{margin:3px 0 5px;justify-content:center;gap:7px}
+.brk-cookie-tools .brk-slot{height:32px;width:32px;max-width:44px;min-width:0;flex:1}
+.brk-cookie-tools .brk-edit-selection{margin:0 auto;padding:3px 6px;font-size:10px;display:flex;align-items:center;justify-content:center}
+.brk-cookie-tools .brk-bottom-summary{margin:2px 0 0;min-height:0;justify-content:center;text-align:center;font-size:11px}
+.brk-cookie-tools .brk-bottom-summary span{max-width:100%;color:#f6decf}
+.brk-cookie-tools .brk-selection-list{max-height:22dvh;overflow-y:auto;margin:5px 0 0}
+.brk-header-hint{position:absolute;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.06em;font-weight:800;color:#f7dfd5;white-space:nowrap;text-shadow:0 1px 4px #200714}
+.brk-header-hint span{font-size:16px;vertical-align:middle}
+.brk-top>a:first-child{position:relative;z-index:1}
+.brk-top>.brk-header-contact{position:relative;z-index:1}
+.brk-reel.brk-cookie-layout .brk-reel-content,.brk-reel.brk-other-layout .brk-reel-content{bottom:clamp(92px,13vh,145px)!important;padding-right:78px}
+.brk-reel .brk-reel-content{max-height:calc(100dvh - 235px)}
+.brk-reel .brk-reel-content p{-webkit-line-clamp:3}
+@media(max-height:700px){.brk-reel.brk-cookie-layout .brk-reel-content,.brk-reel.brk-other-layout .brk-reel-content{bottom:90px!important}.brk-cookie-tools{top:99px;padding-top:3px}.brk-cookie-tools .brk-slot{height:27px}.brk-reel .brk-reel-content p{-webkit-line-clamp:2}}
+@media(max-width:390px){.brk-top img{max-width:112px}.brk-top a:first-child{font-size:20px}.brk-header-hint{font-size:9px}.brk-cookie-tools{padding-left:10px;padding-right:10px}}
