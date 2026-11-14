@@ -163,3 +163,14 @@ body:has(.brk-app){background:#360e20;margin:0}
  body:has(.brk-app){background:radial-gradient(ellipse at 15% 30%,#6c243c 0%,transparent 52%),radial-gradient(ellipse at 90% 65%,#32101d 0%,transparent 55%),#260b17}
  .brk-app{box-shadow:0 0 65px #10040c70}
 }
+
+/* Ajustes solicitados: precio inline, WhatsApp verde, sumar compacto, textos bajos */
+.brk-reel-content .brk-reel-actions{display:none!important}
+.brk-inline-price{display:inline;white-space:nowrap;vertical-align:baseline;font-family:Arial,sans-serif;font-size:clamp(13px,2.7vw,17px);font-weight:600;letter-spacing:0;margin-left:8px;color:#f5e6d8}
+.brk-header-contact{background:#25d366!important;color:#fff!important}
+.brk-float-plus{width:60px;height:60px;flex-direction:column;gap:0;line-height:1}
+.brk-add-label{font:700 9px/1.1 Arial,sans-serif;letter-spacing:.05em;margin-top:1px}
+.brk-reel-content{bottom:clamp(95px,13vh,135px)!important}
+.brk-reel-content h1{margin:5px 0 6px}
+.brk-reel-content p{margin:3px 0}
+@media(min-width:750px){.brk-reel-content{bottom:110px!important}}
