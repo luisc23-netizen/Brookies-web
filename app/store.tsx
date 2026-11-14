@@ -19,7 +19,7 @@ export default function Store({products,settings,initialSection='cookies',initia
  const scrollRef=useRef<HTMLDivElement>(null);
  const wrapGuard=useRef(false);
  const introPlayed=useRef(false);
- const wrapTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+ const wrapTimer=useRef<number|null>(null);
  const active=products.filter(p=>p.active!==false);const flavors=active.filter(p=>cookieFlavor(p)&&!isGoBig(p));
  const royals=active.filter(p=>/royal/.test(normalize(p.category)));const details=active.filter(p=>/pequenos detalles|pequeno detalle/.test(normalize(p.category)));
  const celebrations=active.filter(p=>/celebracion/.test(normalize(p.category))||p.gift_eligible===true);
