@@ -1,3 +1,4 @@
+import {isGoBig,cookieFlavor} from '../../../lib/box-pricing';
 import {NextRequest,NextResponse} from 'next/server';
 import {catalog,db,siteSettings} from '../../../lib/server';
 import {sanitizeAttribution} from '../../../lib/attribution';
@@ -15,7 +16,7 @@ export async function POST(req:NextRequest){try{
  if(!Array.isArray(body.items)||!body.items.length||body.items.length>50)return NextResponse.json({error:'Carrito inválido'},{status:400});
  const products=await catalog();const rows:{id:string;name:string;qty:number;unit_price:number;flavors:{id:string;name:string;qty:number}[]}[]=[];
  for(const line of body.items){const p=products.find(p=>p.id===line.id&&p.active!==false),qty=Number(line.qty);if(!p||!Number.isInteger(qty)||qty<1||qty>30||!Number.isFinite(Number(p.price))||Number(p.price)<=0)return NextResponse.json({error:'Producto o cantidad inválida'},{status:400});
- const flavors=Array.isArray(line.flavors)?line.flavors:[];if(p.product_type==='personalizable'&&p.box_size){const opts=products.filter(x=>x.active!==false&&x.product_type!=='personalizable'&&String(x.category||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()==='coleccion de cookies');if(flavors.reduce((n:number,f:{qty:number})=>n+Number(f.qty||0),0)!==p.box_size||flavors.some((f:{id:string;qty:number})=>!opts.some(o=>o.id===f.id)||!Number.isInteger(Number(f.qty))||Number(f.qty)<1))return NextResponse.json({error:'Revisá los sabores de la box'},{status:400});}
+ const flavors=Array.isArray(line.flavors)?line.flavors:[];if(isGoBig(p)||p.product_type==='personalizable'&&p.box_size){const opts=products.filter(x=>x.active!==false&&cookieFlavor(x)&&!isGoBig(x));if(flavors.reduce((n:number,f:{qty:number})=>n+Number(f.qty||0),0)!==(Number(p.box_size)||Number((p.slug||p.name).match(/[246]/)?.[0]||0))||flavors.some((f:{id:string;qty:number})=>!opts.some(o=>o.id===f.id)||!Number.isInteger(Number(f.qty))||Number(f.qty)<1))return NextResponse.json({error:'Revisá los sabores de la box'},{status:400});}
  rows.push({id:p.id,name:p.name,qty,unit_price:Number(p.price),flavors:flavors.map((f:{id:string;qty:number})=>({id:f.id,name:products.find(p=>p.id===f.id)?.name||'',qty:Number(f.qty)}))});}
  const settings=await siteSettings(),fee=delivery==='Envío dentro de Rosario'?Number(settings.rosario_delivery_fee||4000):0;if(!Number.isFinite(fee)||fee<0)return NextResponse.json({error:'Envío inválido'},{status:500});
  const total=rows.reduce((n,r)=>n+r.qty*r.unit_price,0)+fee;

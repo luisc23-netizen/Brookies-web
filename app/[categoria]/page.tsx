@@ -1,0 +1,6 @@
+import {notFound} from 'next/navigation';import type {Metadata} from 'next';
+import {catalog,siteSettings} from '../../lib/server';import Store from '../store';
+const sections=['cookies','royal','celebraciones','empresas','pequenos-detalles'];
+export const dynamic='force-dynamic';
+export async function generateMetadata({params}:{params:Promise<{categoria:string}>}):Promise<Metadata>{const {categoria}=await params;const titles:Record<string,string>={cookies:'Cookies artesanales rellenas en Rosario',royal:'Royal · Cookies y cajas premium',celebraciones:'Cookies para cumpleaños y celebraciones',empresas:'Regalos empresariales en Rosario','pequenos-detalles':'Pequeños detalles para regalar'};return {title:titles[categoria]||'Brookies',alternates:{canonical:`/${categoria}`}}}
+export default async function Category({params,searchParams}:{params:Promise<{categoria:string}>;searchParams:Promise<{producto?:string}>}){const {producto}=await searchParams;const {categoria}=await params;if(!sections.includes(categoria))notFound();const [products,settings]=await Promise.all([catalog(),siteSettings()]);return <Store products={products} settings={settings} initialSection={categoria} initialProduct={producto}/>}
