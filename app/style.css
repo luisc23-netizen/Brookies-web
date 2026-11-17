@@ -258,3 +258,11 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-top>a:first-child{margin-right:auto}
 .brk-top>.brk-header-contact{margin-left:0}
 .brk-author-message .brk-author-second{display:block;margin-top:5px}
+
+/* Ajustes Brookies: carrito, llamada a la acción y favoritos */
+.brk-app .brk-top.brk-top-cart{background:#4b1023!important}
+.brk-location-popover a{font-size:10px!important;font-weight:650!important;letter-spacing:.015em}
+.brk-cart-placeholder{margin:0;min-height:39px;display:flex;align-items:center;justify-content:center;text-align:center;color:#f5e6d8;font-size:12px;font-weight:750;letter-spacing:.035em}
+.brk-float-like{width:49px;height:49px;color:#f5e6d8!important;background:transparent!important;box-shadow:none!important;border:0!important;filter:drop-shadow(0 1px 2px #250715b8)}
+.brk-float-like.is-liked{color:#f0a4b1!important}
+.brk-float-like svg{stroke:currentColor}
