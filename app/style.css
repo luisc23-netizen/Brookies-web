@@ -274,3 +274,11 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-campaign-shine{border-color:#ffdf8a;background:linear-gradient(115deg,#5b1827,#8a4d25,#4c1125);box-shadow:0 0 12px #ffe0a2a8,0 0 0 1px #ffe4a85c;animation:brkCampaignGlow 2.8s ease-in-out infinite}
 @keyframes brkCampaignGlow{0%,100%{box-shadow:0 0 9px #ffe0a270,0 0 0 1px #ffe4a850}50%{box-shadow:0 0 21px #ffe0a2d9,0 0 0 2px #ffe4a88a}}
 @media(prefers-reduced-motion:reduce){.brk-campaign-shine{animation:none}}
+
+/* Categorías de campaña configuradas desde el administrador */
+.brk-tabs .brk-highlight-category{position:relative;isolation:isolate;text-shadow:0 1px 2px #240a18;transition:box-shadow .2s ease,transform .2s ease}
+.brk-tabs .brk-highlight-category:hover{transform:translateY(-1px)}
+.brk-category-colors{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:10px;border:1px solid #ccc;border-radius:12px}
+.brk-category-colors label{display:flex;align-items:center;gap:6px;font-size:12px}
+.brk-category-colors input[type=color]{width:35px;height:30px;padding:0;cursor:pointer}
+.brk-category-preview{border:1px solid;border-radius:40px;padding:9px 16px;color:white;font-weight:700}
