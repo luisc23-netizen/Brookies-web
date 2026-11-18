@@ -32,8 +32,9 @@ export default function Store({products,settings,initialSection='cookies',initia
  const categoryDefs:{name:string;sort_order:number;active:boolean;highlight?:boolean;bg_color?:string;border_color?:string;glow_color?:string;glow_strength?:number}[]=(()=>{try{const v=JSON.parse(settings.catalog_categories||'[]');return Array.isArray(v)?v:[]}catch{return []}})();
  const slugCategory=(name:string)=>normalize(name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
  const categoryTabs=[...categoryDefs.filter(c=>c.active).sort((a,b)=>a.sort_order-b.sort_order).map(c=>({id:slugCategory(c.name),...c})),...active.filter(p=>!categoryDefs.some(c=>normalize(c.name)===normalize(p.category))).map(p=>({id:slugCategory(p.category),name:p.category,sort_order:999,active:true}))].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
- const builtInTabs=[{id:'cookies',name:'Cookies'},{id:'royal',name:'Royal'},{id:'celebraciones',name:'Celebraciones'},{id:'empresas',name:'Empresas'},{id:'pequenos-detalles',name:'Pequeños detalles'}];
- const tabs=[...builtInTabs.filter(c=>!categoryDefs.some(x=>slugCategory(x.name)===c.id)),...categoryTabs].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
+ type CategoryTab={id:string;name:string;sort_order?:number;active?:boolean;highlight?:boolean;bg_color?:string;border_color?:string;glow_color?:string;glow_strength?:number};
+ const builtInTabs:CategoryTab[]=[{id:'cookies',name:'Cookies'},{id:'royal',name:'Royal'},{id:'celebraciones',name:'Celebraciones'},{id:'empresas',name:'Empresas'},{id:'pequenos-detalles',name:'Pequeños detalles'}];
+ const tabs:CategoryTab[]=[...builtInTabs.filter(c=>!categoryDefs.some(x=>slugCategory(x.name)===c.id)),...categoryTabs].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
  const category=categoryDefs.find(c=>slugCategory(c.name)===section);
  const shown=section==='cookies'?flavors:section==='royal'?royals:section==='celebraciones'?celebrations:section==='pequenos-detalles'?details:section==='empresas'?businesses:active.filter(p=>slugCategory(p.category)===section);
  const tabName=tabs.find(t=>t.id===section)?.name||section;
