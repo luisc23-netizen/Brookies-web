@@ -31,12 +31,14 @@ export default function Store({products,settings,initialSection='cookies',initia
  const businesses=active.filter(p=>/empresa/.test(normalize(p.category)));
  const categoryDefs:{name:string;sort_order:number;active:boolean;highlight?:boolean;bg_color?:string;border_color?:string;glow_color?:string;glow_strength?:number}[]=(()=>{try{const v=JSON.parse(settings.catalog_categories||'[]');return Array.isArray(v)?v:[]}catch{return []}})();
  const slugCategory=(name:string)=>normalize(name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
- const categoryTabs=[...categoryDefs.filter(c=>c.active).sort((a,b)=>a.sort_order-b.sort_order).map(c=>({id:slugCategory(c.name),...c})),...active.filter(p=>!categoryDefs.some(c=>normalize(c.name)===normalize(p.category))).map(p=>({id:slugCategory(p.category),name:p.category,sort_order:999,active:true}))].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
+ // Las secciones históricas conservan su identidad. Las categorías creadas en el admin
+ // se añaden únicamente cuando son nuevas, sin inferir pestañas de cada producto.
  type CategoryTab={id:string;name:string;sort_order?:number;active?:boolean;highlight?:boolean;bg_color?:string;border_color?:string;glow_color?:string;glow_strength?:number};
- const builtInTabs:CategoryTab[]=[{id:'cookies',name:'Cookies'},{id:'royal',name:'Royal'},{id:'celebraciones',name:'Celebraciones'},{id:'empresas',name:'Empresas'},{id:'pequenos-detalles',name:'Pequeños detalles'}];
- const tabs:CategoryTab[]=[...builtInTabs.filter(c=>!categoryDefs.some(x=>slugCategory(x.name)===c.id)),...categoryTabs].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
- const category=categoryDefs.find(c=>slugCategory(c.name)===section);
- const shown=section==='cookies'?flavors:section==='royal'?royals:section==='celebraciones'?celebrations:section==='pequenos-detalles'?details:section==='empresas'?businesses:active.filter(p=>slugCategory(p.category)===section);
+ const canonicalId=(name:string)=>{const id=slugCategory(name);if(['cookies','cookie','coleccion-de-cookies','coleccion-de-cookie'].includes(id))return 'cookies';if(['celebracion','celebraciones'].includes(id))return 'celebraciones';if(['royal','royals'].includes(id))return 'royal';if(['empresa','empresas'].includes(id))return 'empresas';if(['pequeno-detalle','pequenos-detalles'].includes(id))return 'pequenos-detalles';return id};
+ const builtInTabs:CategoryTab[]=[{id:'cookies',name:'Cookies'},{id:'celebraciones',name:'Celebraciones'},{id:'royal',name:'Royal'},{id:'empresas',name:'Empresas'},{id:'pequenos-detalles',name:'Pequeños detalles'}];
+ const tabs:CategoryTab[]=[...builtInTabs.map(t=>({...t,...(categoryDefs.find(c=>canonicalId(c.name)===t.id)||{}),id:t.id,name:t.name})),...categoryDefs.filter(c=>c.active&& !builtInTabs.some(t=>t.id===canonicalId(c.name))).sort((a,b)=>a.sort_order-b.sort_order).map(c=>({id:canonicalId(c.name),...c}))].filter((c,i,a)=>a.findIndex(x=>x.id===c.id)===i);
+ const category=categoryDefs.find(c=>canonicalId(c.name)===section);
+ const shown=section==='cookies'?flavors:section==='royal'?royals:section==='celebraciones'?celebrations:section==='pequenos-detalles'?details:section==='empresas'?businesses:active.filter(p=>canonicalId(p.category)===section);
  const tabName=tabs.find(t=>t.id===section)?.name||section;
  const tabStyle=(c:{highlight?:boolean;bg_color?:string;border_color?:string;glow_color?:string;glow_strength?:number}):React.CSSProperties=>c.highlight?{background:c.bg_color||'#57152a',borderColor:c.border_color||'#ffe2a4',borderStyle:'solid',borderWidth:1,color:'#fff5e9',boxShadow:`0 0 ${Math.round((c.glow_strength??60)/5)}px ${c.glow_color||'#ffd78b'}`}:{ };
  const viewedRef=useRef('');
