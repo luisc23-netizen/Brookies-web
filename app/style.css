@@ -292,3 +292,6 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-delivery-popover>a{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;border-radius:9px;background:#fff8;color:#4b1023!important;text-decoration:none;font:700 14px/1.2 Arial,sans-serif!important;letter-spacing:0!important}
 .brk-delivery-popover>a:active,.brk-delivery-popover>a:hover{background:#ecd3cf}
 @media(max-width:390px){.brk-delivery-wordmark{font-size:10px}.brk-delivery-wordmark svg{width:15px}.brk-delivery-toggle{padding:4px 5px}.brk-top{padding-left:9px!important;padding-right:9px!important;gap:5px!important}}
+
+.brk-delivery-price-note{margin:0 4px 8px;padding:9px 10px;border-radius:9px;background:#fff9;color:#5b3540;font:500 12px/1.45 Arial,sans-serif}
+.brk-delivery-wordmark{letter-spacing:0;font-size:11px}
