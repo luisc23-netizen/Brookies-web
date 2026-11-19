@@ -282,3 +282,13 @@ body:has(.brk-app){background:#360e20;margin:0}
 .brk-category-colors label{display:flex;align-items:center;gap:6px;font-size:12px}
 .brk-category-colors input[type=color]{width:35px;height:30px;padding:0;cursor:pointer}
 .brk-category-preview{border:1px solid;border-radius:40px;padding:9px 16px;color:white;font-weight:700}
+
+/* Acceso a apps de delivery, entre logo y ubicación */
+.brk-delivery-toggle{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px 7px;border:1px solid #fff8;border-radius:20px;background:#4b102350;color:#fff;cursor:pointer;min-height:36px}
+.brk-delivery-wordmark{display:inline-flex;align-items:center;gap:2px;font:bold 12px/1 Arial,sans-serif;letter-spacing:-.6px;color:#fff;white-space:nowrap}
+.brk-delivery-popover{position:absolute;right:10px;top:calc(100% + 8px);z-index:110;width:min(315px,calc(100vw - 20px));padding:12px;border-radius:14px;background:#f6e9df;color:#4b1023;box-shadow:0 12px 32px #1d0715bb;display:flex;flex-direction:column;gap:5px}
+.brk-delivery-title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 8px;font:700 13px/1.4 Arial,sans-serif}
+.brk-delivery-title button{background:none;border:0;color:inherit;cursor:pointer;padding:5px;display:grid;place-items:center}
+.brk-delivery-popover>a{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;border-radius:9px;background:#fff8;color:#4b1023!important;text-decoration:none;font:700 14px/1.2 Arial,sans-serif!important;letter-spacing:0!important}
+.brk-delivery-popover>a:active,.brk-delivery-popover>a:hover{background:#ecd3cf}
+@media(max-width:390px){.brk-delivery-wordmark{font-size:10px}.brk-delivery-wordmark svg{width:15px}.brk-delivery-toggle{padding:4px 5px}.brk-top{padding-left:9px!important;padding-right:9px!important;gap:5px!important}}
