@@ -1,0 +1,7 @@
+ARCHIVOS LISTOS PARA SUBIR A GITHUB, SIN INSTALADOR.
+
+1) Ejecutá 01_SUPABASE.sql en Supabase SQL Editor.
+2) Subí los archivos respetando sus rutas (app/ y lib/) a la raíz del repositorio.
+3) Revisá la compilación de Vercel y probá compra Tiny, Go Big, fecha/franja y estadísticas.
+
+ADVERTENCIA: Archivos derivados de la versión de Brookies del 18/11/2026. Si cambiaste estos mismos archivos en GitHub después de esa fecha, reemplazarlos puede pisar cambios recientes. No se ejecutó una compilación completa.

@@ -1,6 +1,6 @@
 import type {Product} from './data';
 export const normalize=(s:string)=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
-export const cookieFlavor=(p:Product)=>normalize(p.category)==='coleccion de cookies'||normalize(p.category)==='cookies';
+export const cookieFlavor=(p:Product)=>!p.is_tiny&&(normalize(p.category)==='coleccion de cookies'||normalize(p.category)==='cookies');
 export const isGoBig=(p:Product)=>/\bgo\s*big\s*(2|4|6)\b/i.test(p.name)||/^go-big-(2|4|6)$/.test(p.slug||'');
 export function isRosarioTuesday(now=new Date()){return new Intl.DateTimeFormat('en-US',{timeZone:'America/Argentina/Buenos_Aires',weekday:'long'}).format(now)==='Tuesday';}
 export function promotionalPrice(product:Product,products:Product[],tuesday:boolean){if(!tuesday||!isGoBig(product))return Number(product.price);const size=Number(product.box_size)||Number((product.slug||product.name).match(/[246]/)?.[0]||0);if(size!==4)return Number(product.price);const unit=products.find(p=>p.active!==false&&cookieFlavor(p)&&!isGoBig(p));return unit?Math.min(Number(product.price),3*Number(unit.price)):Number(product.price);}
