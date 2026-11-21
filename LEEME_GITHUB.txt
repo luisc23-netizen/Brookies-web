@@ -1,0 +1,18 @@
+BROOKIES — CORRECCIONES 21/11/2026
+
+Subí a GitHub los archivos de las carpetas app y lib respetando las rutas existentes. No borres los demás archivos.
+
+SQL: NO ejecutar nuevamente el SQL anterior. Este parche utiliza las columnas y tabla web_interactions que ya creaste.
+
+Cambios:
+- Restaurados accesos a PedidosYa, Uber Eats, Mercado Libre y Rappi en la tienda.
+- Fecha de retiro/envío precargada con hoy en Rosario.
+- Horario libre: el cliente lo escribe.
+- WhatsApp de pedido incluye productos, cantidad y sabores Tiny.
+- Mercado Pago: títulos de items incluyen sabores (el pedido completo también queda en web_orders.items).
+- Tracking: clic en WhatsApp superior, mapa, apps, vista de productos y checkout.
+- Estadísticas: muestra interacciones, errores y período hoy.
+
+NOTA: El clic a WhatsApp o a una app NO garantiza que se haya enviado un mensaje o comprado.
+Las ventas WhatsApp siguen siendo intención de compra hasta su confirmación.
+Verificá el build en Vercel y probá un pedido Tiny y uno Go Big antes de vender.
